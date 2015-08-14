@@ -27,8 +27,8 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        GameObject.Find("GameManager").GetComponent<GameManager>().JarReset();
         Debug.Log("ray count: " + rayList.Count);
-        GameObject.Find("Jar").GetComponent<Jar>().update = false;
         for (int i = 0; i < rayList.Count; i++) {
             RaycastHit2D[] hit = Physics2D.RaycastAll(((Ray2D)rayList[i]).origin, AddAngle(((Ray2D)rayList[i]).direction, gameObject.transform.rotation.eulerAngles.z));
             Debug.Log("hit: "+ hit.Length);

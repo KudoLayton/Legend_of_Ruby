@@ -8,7 +8,7 @@ public class Jar : MonoBehaviour {
     RaycastHit2D hit;
     // Use this for initialization
 	void Start () {
-        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+//        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         durability = jarImg.Length;
     }
 	// Update is called once per frame
@@ -18,7 +18,7 @@ public class Jar : MonoBehaviour {
             Destroy(gameObject);
         else
         {
-            hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+/*            hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             GetComponent<SpriteRenderer>().sprite = jarImg[jarImg.Length - durability];
             if (hit.collider != null)
             {
@@ -26,7 +26,7 @@ public class Jar : MonoBehaviour {
                 if (Input.GetMouseButtonDown(0))
                     GetAttack();
             }
-        }
+*/        }
     }
     
     void GetAttack()

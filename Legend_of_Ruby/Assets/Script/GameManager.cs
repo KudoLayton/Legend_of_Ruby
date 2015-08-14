@@ -4,7 +4,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
     public int numJar;
     public GameObject jar;
-    ArrayList jarList;
+    public ArrayList jarList;
 	// Use this for initialization
 	void Start () {
         jarList = new ArrayList();

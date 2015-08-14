@@ -4,13 +4,13 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
     public int numJar;
     public GameObject jar;
-    ArrayList jarList;
+    public ArrayList jarList;
 	// Use this for initialization
 	void Start () {
         jarList = new ArrayList();
         for (int i = 0; i < numJar; i++)
         {
-            GameObject newjar = (GameObject)Instantiate(jar, new Vector2(Random.Range(-15f, 15f), Random.Range(-8, 8)), Quaternion.identity);
+            GameObject newjar = (GameObject)Instantiate(jar, new Vector2(Random.Range(-15f, 15f), Random.Range(-8f, 8f)), Quaternion.identity);
             jarList.Add(newjar);
         }
 	}

@@ -40,9 +40,9 @@ public class Player : MonoBehaviour {
                 Hit.collider.GetComponent<Jar>().update = true;
             }
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.A))
             gameObject.transform.Rotate(new Vector3(0f, 0f, -rotationSpeed));
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.D))
             gameObject.transform.Rotate(new Vector3(0f, 0f, rotationSpeed));
     }
 

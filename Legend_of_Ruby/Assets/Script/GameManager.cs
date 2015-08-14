@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < jarMax; i++)
         {
             transform.position = new Vector2(Random.Range(0, 5), Random.Range(0, 10));
-            Instantiate(jar, transform.position, Quaternion.identity);
+            GameObject temp = (GameObject)Instantiate(jar, transform.position, Quaternion.identity);
+            temp.name = "jar" + i;
             //Jar temp = (Jar)Instantiate(jar, transform.position, Quaternion.identity);
             //Instantiate(jar, startPosition[i], Quaternion.identity); 
             //temp.setID(i);

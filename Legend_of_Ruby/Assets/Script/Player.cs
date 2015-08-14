@@ -5,6 +5,7 @@ public class Player : MonoBehaviour {
     public Light light;
     public float deltaT;
     public float range;
+    public float rotationSpeed;
     ArrayList rayList;
 	// Use this for initialization
 	void Start () {
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Debug.Log("ray count: " + rayList.Count);
+        GameObject.Find("Jar").GetComponent<Jar>().update = false;
         for (int i = 0; i < rayList.Count; i++) {
             RaycastHit2D[] hit = Physics2D.RaycastAll(((Ray2D)rayList[i]).origin, AddAngle(((Ray2D)rayList[i]).direction, gameObject.transform.rotation.eulerAngles.z));
             Debug.Log("hit: "+ hit.Length);
@@ -35,10 +37,14 @@ public class Player : MonoBehaviour {
                 {
                     break;
                 }
-                Debug.Log("I can watch: " + Hit.collider.gameObject.name);
+                Hit.collider.GetComponent<Jar>().update = true;
             }
         }
-	}
+        if (Input.GetKey(KeyCode.RightArrow))
+            gameObject.transform.Rotate(new Vector3(0f, 0f, -rotationSpeed));
+        else if (Input.GetKey(KeyCode.LeftArrow))
+            gameObject.transform.Rotate(new Vector3(0f, 0f, rotationSpeed));
+    }
 
     Vector2 AddAngle(Vector2 original, float angle) {
         return new Vector2(original.x*DegCos(angle)-original.y*DegSin(angle), original.x*DegSin(angle)+original.y*DegCos(angle));

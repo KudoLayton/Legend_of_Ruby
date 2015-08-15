@@ -13,7 +13,7 @@ GameObject:
   - 114: {fileID: 11475000}
   m_Layer: 0
   m_Name: Jar
-  m_TagString: Untagged
+  m_TagString: Jar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,9 +60,9 @@ MonoBehaviour:
   shrimp: {fileID: 21300000, guid: f159283ecfe7fde42958e1f613dd91e7, type: 3}
   poka: {fileID: 21300000, guid: cdc9da8098283db448d5e68405ba9a51, type: 3}
   fruit: {fileID: 21300000, guid: 2caed6f7959bb044e9c6cd1bc859e9d9, type: 3}
-  level_1: 1
-  level_2: 2
-  level_3: 3
+  level_1: .600000024
+  level_2: 1
+  level_3: 1.20000005
 --- !u!212 &21253022
 SpriteRenderer:
   m_ObjectHideFlags: 1

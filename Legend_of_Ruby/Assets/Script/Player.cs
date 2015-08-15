@@ -29,16 +29,16 @@ public class Player : MonoBehaviour {
 	void Update () {
         GameObject.Find("GameManager").GetComponent<GameManager>().JarReset();
         GameObject.Find("Hanning").GetComponent<Renderer>().enabled = false;
-  //      Debug.Log("ray count: " + rayList.Count);
+   //     Debug.Log("ray count: " + rayList.Count);
         for (int i = 0; i < rayList.Count; i++) {
             RaycastHit2D[] hit = Physics2D.RaycastAll(((Ray2D)rayList[i]).origin, AddAngle(((Ray2D)rayList[i]).direction, gameObject.transform.rotation.eulerAngles.z));
- //           Debug.Log("hit: "+ hit.Length);
+   //         Debug.Log("hit: "+ hit.Length);
             foreach (RaycastHit2D Hit in hit) {
                 if (Hit.collider.tag == "obstacle")
                 {
                     break;
                 }
-                else if (Hit.collider.name == "Jar(Clone)")
+                else if (Hit.collider.tag == "Jar")
                 {
                     Hit.collider.GetComponent<Jar>().update = true;
                 }

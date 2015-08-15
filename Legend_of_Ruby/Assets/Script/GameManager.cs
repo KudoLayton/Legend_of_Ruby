@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-    public int numJar;
     public GameObject jar;
     public ArrayList jarList;
     public int limitMoney;
@@ -19,13 +18,15 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         jarList = new ArrayList();
+        GameObject[] copyList = GameObject.FindGameObjectsWithTag("Jar");
+        
+        foreach (GameObject jar in copyList)
+        {
+            jarList.Add(jar);
+        }
+        Debug.Log("Jar count: "+ jarList.Count);
         showMental = mental;
         showMoney = money;
-        for (int i = 0; i < numJar; i++)
-        {
-            GameObject newjar = (GameObject)Instantiate(jar, new Vector2(Random.Range(-11f, 11f), Random.Range(0f, 8f)), Quaternion.identity);
-            jarList.Add(newjar);
-        }
 	}
     public void MentalDeal() {
         mental -= mentalDamage;

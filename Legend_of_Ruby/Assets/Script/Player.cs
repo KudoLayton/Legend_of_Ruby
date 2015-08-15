@@ -6,8 +6,16 @@ public class Player : MonoBehaviour {
     public float deltaT;
     public float range;
     public float rotationSpeed;
+    
+    public bool addlamp;
+    public GameObject lamp;
+    public Texture2D lampImg;
+
     ArrayList rayList;
-	// Use this for initialization
+    ArrayList lampList;
+
+    
+    // Use this for initialization
 	void Start () {
         rayList = new ArrayList();
         light = gameObject.GetComponentInChildren<Light>();
@@ -23,8 +31,18 @@ public class Player : MonoBehaviour {
                 rayList.Add(ray_1);
             }
         }
+
+        lampList = new ArrayList();
+        addlamp = false;
 	}
-	
+
+    public void AddLamp()
+    {
+        Cursor.SetCursor(lampImg, Vector2.zero, CursorMode.Auto);
+        addlamp = true;
+
+    }
+
 	// Update is called once per frame
 	void Update () {
         GameObject.Find("GameManager").GetComponent<GameManager>().JarReset();
@@ -44,6 +62,31 @@ public class Player : MonoBehaviour {
             gameObject.transform.Rotate(new Vector3(0f, 0f, -rotationSpeed));
         else if (Input.GetKey(KeyCode.D))
             gameObject.transform.Rotate(new Vector3(0f, 0f, rotationSpeed));
+
+        for (int i = 0; i < lampList.Count; i++)
+        {
+            Collider2D[] hit = Physics2D.OverlapCircleAll(((GameObject)lampList[i]).GetComponent<Transform>().position, ((GameObject)lampList[i]).GetComponent<Light>().range);
+            foreach (Collider2D Hit in hit)
+            {
+                if (Hit.tag == "obstacle")
+                    break;
+                Hit.GetComponent<Jar>().update = true;
+            }
+        }
+        if (addlamp)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+                if (Input.GetMouseButtonDown(0))
+                {
+                    GameObject newlamp = (GameObject)Instantiate(lamp, new Vector3(hit.point.x, hit.point.y, -((float)2 / 10)), Quaternion.identity);
+                    lampList.Add(newlamp);
+                    Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                    addlamp = false;
+                }
+        }
+
     }
 
     Vector2 AddAngle(Vector2 original, float angle) {

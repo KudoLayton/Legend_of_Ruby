@@ -350,7 +350,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 409529117}
+      - m_Target: {fileID: 1113343954}
         m_MethodName: AddLamp
         m_Mode: 1
         m_Arguments:
@@ -430,10 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numJar: 3
-  lampImg: {fileID: 10900, guid: 0000000000000000f000000000000000, type: 0}
-  addlamp: 0
   jar: {fileID: 190168, guid: 320921fff0df6da4991529e11f5b8456, type: 2}
-  lamp: {fileID: 109530, guid: 8c50741aee749e449acecffb6ba1eec9, type: 2}
 --- !u!1 &757935750
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +753,9 @@ MonoBehaviour:
   deltaT: 3
   range: 30
   rotationSpeed: 1
+  addlamp: 0
+  lamp: {fileID: 109530, guid: 8c50741aee749e449acecffb6ba1eec9, type: 2}
+  lampImg: {fileID: 10900, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &1163064753
 GameObject:
   m_ObjectHideFlags: 0

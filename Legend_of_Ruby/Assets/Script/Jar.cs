@@ -31,7 +31,6 @@ public class Jar : MonoBehaviour {
                     gameObject.GetComponent<SpriteRenderer>().sprite = fruit;
                     break;
                 default:
-                    Destroy(gameObject);
                     break;
             }
         }
@@ -39,19 +38,22 @@ public class Jar : MonoBehaviour {
 
     public void ForceUpdate() { Update(); }
 
-    public IEnumerator Hold(GameObject link) {
-        switch (duration) {
+    public IEnumerator Hold(GameObject link)
+    {
+        switch (duration)
+        {
             case 3:
                 yield return new WaitForSeconds(level_1);
                 if (!link.GetComponent<JeldaAI>().freeze)
                 {
                     duration--;
                     link.GetComponent<JeldaAI>().status = true;
-                }   
+                }
                 break;
             case 2:
                 yield return new WaitForSeconds(level_2);
-                if (!link.GetComponent<JeldaAI>().freeze) {
+                if (!link.GetComponent<JeldaAI>().freeze)
+                {
                     duration--;
                     link.GetComponent<JeldaAI>().status = true;
                 }
@@ -60,10 +62,14 @@ public class Jar : MonoBehaviour {
                 yield return new WaitForSeconds(level_3);
                 if (!link.GetComponent<JeldaAI>().freeze)
                 {
+                    Debug.Log("Hello Ang?: " + gameObject.name);
                     duration--;
                     GameObject.Find("GameManager").GetComponent<GameManager>().MentalDeal();
                     GameObject.Find("GameManager").GetComponent<GameManager>().MoneyDeal();
-                    Destroy(gameObject);
+                    gameObject.GetComponent<AudioSource>().Play();
+                    yield return new WaitForSeconds(2f);
+                    if(gameObject != null)
+                        Destroy(gameObject);
                     link.GetComponent<JeldaAI>().status = true;
                 }
                 break;

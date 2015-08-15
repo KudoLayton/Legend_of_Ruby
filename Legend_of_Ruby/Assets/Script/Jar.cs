@@ -37,6 +37,8 @@ public class Jar : MonoBehaviour {
         }
 	}
 
+    public void ForceUpdate() { Update(); }
+
     public IEnumerator Hold(GameObject link) {
         switch (duration) {
             case 3:

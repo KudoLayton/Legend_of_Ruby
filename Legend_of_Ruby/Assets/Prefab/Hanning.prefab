@@ -42,9 +42,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
   target: {fileID: 0}
+  normalSprite: {fileID: 21300000, guid: ca9dd5f79b0f34c48a1ddb0d2f93c677, type: 3}
+  freezeSprite: {fileID: 21300000, guid: f570fa0a54a82264b9eebdd7d3e0daa9, type: 3}
   status: 1
   static1: 0
   static2: 0
+  freeze: 0
+  freezeState: 0
+  freezeTime: 0
+  zeldaPrize: 0
 --- !u!212 &21216470
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -77,7 +83,17 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: normalSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ca9dd5f79b0f34c48a1ddb0d2f93c677,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: freezeSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f570fa0a54a82264b9eebdd7d3e0daa9,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 183134}

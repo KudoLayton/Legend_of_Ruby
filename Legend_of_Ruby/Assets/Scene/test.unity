@@ -238,6 +238,16 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 11449770, guid: c2f550c28adaf714f904262cccb4cefa, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d945f8bca82cf304badb818bc4fbc4cc,
+        type: 3}
+    - target: {fileID: 11453312, guid: c2f550c28adaf714f904262cccb4cefa, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c7a53a52f5e827c469f2e08832bff2b3,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2f550c28adaf714f904262cccb4cefa, type: 2}
   m_IsPrefabParent: 0
@@ -924,11 +934,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 409702, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -8.36999989
+      value: -7.86000013
       objectReference: {fileID: 0}
     - target: {fileID: 409702, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6.4000001
+      value: 5.88999987
       objectReference: {fileID: 0}
     - target: {fileID: 409702, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
       propertyPath: m_LocalPosition.z
@@ -952,7 +962,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409702, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 11443236, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
       propertyPath: manager
@@ -966,7 +976,7 @@ Prefab:
     - target: {fileID: 11443236, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
       propertyPath: freezeSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2caed6f7959bb044e9c6cd1bc859e9d9,
+      objectReference: {fileID: 21300000, guid: f570fa0a54a82264b9eebdd7d3e0daa9,
         type: 3}
     - target: {fileID: 11443236, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
       propertyPath: freezeTime
@@ -979,15 +989,15 @@ Prefab:
         type: 3}
     - target: {fileID: 409702, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
       propertyPath: m_LocalScale.x
-      value: .0907063186
+      value: .140531868
       objectReference: {fileID: 0}
     - target: {fileID: 409702, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
       propertyPath: m_LocalScale.y
-      value: .0907062367
+      value: .140531749
       objectReference: {fileID: 0}
     - target: {fileID: 409702, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
       propertyPath: m_LocalScale.z
-      value: .214166611
+      value: .33180967
       objectReference: {fileID: 0}
     - target: {fileID: 11443236, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
       propertyPath: zeldaPrize

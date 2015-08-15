@@ -77,7 +77,7 @@ public class JeldaAI : MonoBehaviour {
             StartCoroutine(target.GetComponent<Jar>().Hold(gameObject));
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (!freeze&&Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
@@ -106,6 +106,7 @@ public class JeldaAI : MonoBehaviour {
     IEnumerator Freeze() {
         freeze = true;
         freezeState = false;
+        gameObject.GetComponent<AudioSource>().Play();
         gameObject.GetComponent<SpriteRenderer>().sprite = freezeSprite;
         yield return new WaitForSeconds(freezeTime);
         freezeState = true;

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
     public float range;
     public float rotationSpeed;
     ArrayList rayList;
+    public GameObject manager;
 
     ArrayList circleList;
 
@@ -41,29 +42,35 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // 아래 부분은 속도를 결정하는 부분입니다. 으어어어어어어어
+        switch (manager.GetComponent<GameManager>().mental)
+        {
+            case 400:
+                rotationSpeed = 1.1f;
+                break;
+            case 320:
+                rotationSpeed = 1.0f;
+                break;
+            case 240:
+                rotationSpeed = 0.7f;
+                break;
+            case 160:
+                rotationSpeed = 0.6f;
+                break;
+            case 80:
+                rotationSpeed = 0.5f;
+                break;
+            default:
+                break;
+
+        }
         GameObject.Find("GameManager").GetComponent<GameManager>().JarReset();
         GameObject.Find("Hanning").GetComponent<Renderer>().enabled = false;
-
-        //Lamb
-        /*
-        for (int i = 0; i < circleList.Count; i++)
-        {
-            RaycastHit2D[] hit = Physics2D.RaycastAll(((Ray2D)circleList[i]).origin, AddAngle(((Ray2D)circleList[i]).direction, gameObject.transform.rotation.eulerAngles.z));
-            foreach (RaycastHit2D Hit in hit)
-            {
-                if (Hit.collider.tag == "obstacle")
-                    break;
-                if (Hit.collider.tag == "Jar")
-                {
-                    Hit.collider.gameObject.GetComponent<Jar>().update = true;
-                    Hit.collider.GetComponent<Jar>().ForceUpdate();
-                }
-                else if (Hit.collider.name == "Hanning")
-                {
-                    Hit.collider.gameObject.GetComponent<Renderer>().enabled = false;
-                }
-            }
-        }*/
+        lampList = new ArrayList();
+        GameObject[] lamplist = GameObject.FindGameObjectsWithTag("Lamp");
+        foreach (GameObject lamp in lamplist) {
+            lampList.Add(lamp);
+        }
         for(int i =0;i<lampList.Count;i++)
         {
             ((GameObject)lampList[i]).GetComponent<Lamp>().Search();
@@ -112,12 +119,11 @@ public class Player : MonoBehaviour {
                     if (hit.collider.gameObject == lampPos[i])
                     {
                         GameObject newlamp = (GameObject)Instantiate(lamp, new Vector3(lampPos[i].transform.position.x, lampPos[i].transform.position.y, -((float)2 / 10)), Quaternion.identity);
-                        lampList.Add(newlamp);
+                        //lampList.Add(newlamp);
                         for (int j = 0; j < lampPos.Length; j++)
                         {
                             lampPos[i].SetActive(false);
                         }
-
                         break;
                     }
             }

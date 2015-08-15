@@ -67,7 +67,7 @@ public class Jar : MonoBehaviour {
                     GameObject.Find("GameManager").GetComponent<GameManager>().MentalDeal();
                     GameObject.Find("GameManager").GetComponent<GameManager>().MoneyDeal();
                     gameObject.GetComponent<AudioSource>().Play();
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(1f);
                     if(gameObject != null)
                         Destroy(gameObject);
                     link.GetComponent<JeldaAI>().status = true;

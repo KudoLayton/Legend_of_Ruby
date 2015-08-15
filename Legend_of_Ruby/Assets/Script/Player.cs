@@ -45,6 +45,7 @@ public class Player : MonoBehaviour {
         GameObject.Find("Hanning").GetComponent<Renderer>().enabled = false;
 
         //Lamb
+        /*
         for (int i = 0; i < circleList.Count; i++)
         {
             RaycastHit2D[] hit = Physics2D.RaycastAll(((Ray2D)circleList[i]).origin, AddAngle(((Ray2D)circleList[i]).direction, gameObject.transform.rotation.eulerAngles.z));
@@ -62,6 +63,10 @@ public class Player : MonoBehaviour {
                     Hit.collider.gameObject.GetComponent<Renderer>().enabled = false;
                 }
             }
+        }*/
+        for(int i =0;i<lampList.Count;i++)
+        {
+            ((GameObject)lampList[i]).GetComponent<Lamp>().Search();
         }
         //     Debug.Log("ray count: " + rayList.Count);
         for (int i = 0; i < rayList.Count; i++) {
@@ -74,8 +79,11 @@ public class Player : MonoBehaviour {
                 }
                 else if (Hit.collider.tag == "Jar")
                 {
-                    Hit.collider.GetComponent<Jar>().update = true;
-                    Hit.collider.GetComponent<Jar>().ForceUpdate();
+                    if (Hit.collider.gameObject != null)
+                    {
+                        Hit.collider.GetComponent<Jar>().update = true;
+                        //Hit.collider.GetComponent<Jar>().ForceUpdate();
+                    }
                 }
                 else if (Hit.collider.name == "Hanning") {
                     Hit.collider.gameObject.GetComponent<Renderer>().enabled = true;
@@ -87,7 +95,6 @@ public class Player : MonoBehaviour {
             gameObject.transform.Rotate(new Vector3(0f, 0f, -rotationSpeed));
         else if (Input.GetKey(KeyCode.A))
             gameObject.transform.Rotate(new Vector3(0f, 0f, rotationSpeed));
-    
 
         OnLight();
     }
@@ -106,20 +113,6 @@ public class Player : MonoBehaviour {
                     {
                         GameObject newlamp = (GameObject)Instantiate(lamp, new Vector3(lampPos[i].transform.position.x, lampPos[i].transform.position.y, -((float)2 / 10)), Quaternion.identity);
                         lampList.Add(newlamp);
-
-                        {
-                            int raynum = (int)(360 / 2 / deltaT);
-                            for (int j = 0; j < raynum + 1; j++)
-                            {
-                                Ray2D ray_0 = new Ray2D(newlamp.transform.position, new Vector2(-DegSin(deltaT * j), DegCos(deltaT * j)));
-                                circleList.Add(ray_0);
-                                if (j == 0)
-                                    continue;
-                                Ray2D ray_1 = new Ray2D(newlamp.transform.position, new Vector2(DegSin(deltaT * j), DegCos(deltaT * j)));
-                                circleList.Add(ray_1);
-                            }
-                        }
-
                         for (int j = 0; j < lampPos.Length; j++)
                         {
                             lampPos[i].SetActive(false);

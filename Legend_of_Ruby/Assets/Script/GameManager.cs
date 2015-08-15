@@ -14,9 +14,18 @@ public class GameManager : MonoBehaviour {
     public int moneyDamage;
     public int mentalDamageSpeed;
     public int showMoney;
-    
+    bool fail;
+    bool end;
+
+    IEnumerator Timer() {
+        yield return new WaitForSeconds(30f);
+        end = true;
+    }
+
 	// Use this for initialization
 	void Start () {
+        fail = false;
+        end = false;
         jarList = new ArrayList();
         GameObject[] copyList = GameObject.FindGameObjectsWithTag("Jar");
         
@@ -83,12 +92,25 @@ public class GameManager : MonoBehaviour {
     
 	// Update is called once per frame
 	void Update () {
-        GameObject.Find("MentalState").GetComponent<Image>().fillAmount = (float)showMental / totalMental;
-        GameObject.Find("LimitMoney").GetComponent<Text>().text = "/"+limitMoney.ToString().PadLeft(3, '0');
-        GameObject.Find("Money").GetComponent<Text>().text = showMoney.ToString().PadLeft(3, '0');
-        if (showMental > mental)
-            StartCoroutine(MentalChange());
-        if (showMoney > money)
-            StartCoroutine(MoenyChange());
+        if (!end && !fail)
+        {
+            GameObject.Find("MentalState").GetComponent<Image>().fillAmount = (float)showMental / totalMental;
+            GameObject.Find("LimitMoney").GetComponent<Text>().text = "/" + limitMoney.ToString().PadLeft(3, '0');
+            GameObject.Find("Money").GetComponent<Text>().text = showMoney.ToString().PadLeft(3, '0');
+            if (showMental != mental)
+                StartCoroutine(MentalChange());
+            if (showMoney != money)
+                StartCoroutine(MoenyChange());
+            if (mental <= 0)
+                fail = true;
+        }
+        else {
+            Destroy(GameObject.Find("Player"));
+            Destroy(GameObject.Find("Hanning"));
+            if (mental > 0 && money > limitMoney)
+                Debug.Log("You Win");
+            else
+                Debug.Log("You Lose");
+        }
 	}
 }

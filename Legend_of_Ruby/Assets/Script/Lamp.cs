@@ -6,6 +6,7 @@ public class Lamp : MonoBehaviour {
     public float deltaT;
 	// Use this for initialization
 	void Start () {
+        StartCoroutine(LifeTime());
         rayList = new ArrayList();
         int raynum = (int)(360 / deltaT);
         for (int i = 0; i < raynum; i++)
@@ -13,6 +14,11 @@ public class Lamp : MonoBehaviour {
             Ray2D ray = new Ray2D(gameObject.transform.position, new Vector2(DegSin(deltaT * i), DegCos(deltaT * i)));
             rayList.Add(ray);
         }
+    }
+
+    IEnumerator LifeTime() {
+        yield return new WaitForSeconds(10f);
+        Destroy(gameObject);
     }
 
     public void Search() {

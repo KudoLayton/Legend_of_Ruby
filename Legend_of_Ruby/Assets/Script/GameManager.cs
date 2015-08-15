@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
         end = false;
         jarList = new ArrayList();
         GameObject[] copyList = GameObject.FindGameObjectsWithTag("Jar");
-        
+        StartCoroutine(Timer());
         foreach (GameObject jar in copyList)
         {
             jarList.Add(jar);
@@ -102,15 +102,19 @@ public class GameManager : MonoBehaviour {
             if (showMoney != money)
                 StartCoroutine(MoenyChange());
             if (mental <= 0)
+            {
+                gameObject.GetComponent<AudioSource>().Play();
                 fail = true;
+            }
         }
         else {
             Destroy(GameObject.Find("Player"));
             Destroy(GameObject.Find("Hanning"));
+            GameObject.Find("Main Camera").GetComponent<AudioSource>().Stop();
             if (mental > 0 && money > limitMoney)
-                Debug.Log("You Win");
-            else
-                Debug.Log("You Lose");
+                GameObject.Find("WinSound").GetComponent<AudioSource>().Play();
+            else if(!fail)
+                GameObject.Find("LoseSound").GetComponent<AudioSource>().Play();
         }
 	}
 }

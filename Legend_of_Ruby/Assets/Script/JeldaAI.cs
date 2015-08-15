@@ -14,6 +14,7 @@ public class JeldaAI : MonoBehaviour {
     public bool freeze;
     public bool freezeState;
     public float freezeTime;
+    public int zeldaPrize;
     float z;
 
 	// Use this for initialization
@@ -82,6 +83,8 @@ public class JeldaAI : MonoBehaviour {
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
             if (hit.collider != null && hit.collider.gameObject == gameObject)
             {
+                GameObject.Find("GameManager").GetComponent<GameManager>().money += zeldaPrize;
+                GameObject.Find("GameManager").GetComponent<GameManager>().MoenyChange();
                 StartCoroutine(Freeze());
             }
         }

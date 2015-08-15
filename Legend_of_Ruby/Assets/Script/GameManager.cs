@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour {
         {
             jarList.Add(jar);
         }
-        Debug.Log("Jar count: "+ jarList.Count);
         showMental = mental;
         showMoney = money;
 	}
@@ -36,19 +35,25 @@ public class GameManager : MonoBehaviour {
         money -= moneyDamage;
     }
 
-    IEnumerator MentalDamage() {
+    public IEnumerator MentalChange() {
         while (showMental - mentalDamageSpeed > mental) {
-            showMental -= mentalDamageSpeed;
+            if(showMental - mentalDamageSpeed > mental)
+                showMental -= mentalDamageSpeed;
+            else if(showMental - mentalDamageSpeed < mental)
+                showMental += mentalDamageSpeed;
             yield return new WaitForEndOfFrame();
         }
         showMental = mental;
     }
 
-    IEnumerator MoenyDamage()
+    public IEnumerator MoenyChange()
     {
         while (showMoney > money)
         {
-            showMoney --;
+            if (showMoney > money)
+                showMoney--;
+            else if (showMoney < money)
+                showMoney++;
             yield return new WaitForSeconds(0.5f);
         }
         showMoney = money;
@@ -82,8 +87,8 @@ public class GameManager : MonoBehaviour {
         GameObject.Find("LimitMoney").GetComponent<Text>().text = "/"+limitMoney.ToString().PadLeft(3, '0');
         GameObject.Find("Money").GetComponent<Text>().text = showMoney.ToString().PadLeft(3, '0');
         if (showMental > mental)
-            StartCoroutine(MentalDamage());
+            StartCoroutine(MentalChange());
         if (showMoney > money)
-            StartCoroutine(MoenyDamage());
+            StartCoroutine(MoenyChange());
 	}
 }

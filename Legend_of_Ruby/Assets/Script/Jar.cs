@@ -7,6 +7,9 @@ public class Jar : MonoBehaviour {
     public Sprite shrimp;
     public Sprite poka;
     public Sprite fruit;
+    public float level_1;
+    public float level_2;
+    public float level_3;
 
 	// Use this for initialization
 	void Start () {
@@ -33,4 +36,27 @@ public class Jar : MonoBehaviour {
             }
         }
 	}
+
+    public IEnumerator Hold(GameObject link) {
+        switch (duration) {
+            case 3:
+                yield return new WaitForSeconds(level_1);
+                duration--;
+                link.GetComponent<JeldaAI>().status = true;
+                break;
+            case 2:
+                yield return new WaitForSeconds(level_2);
+                duration--;
+                link.GetComponent<JeldaAI>().status = true;
+                break;
+            case 1:
+                yield return new WaitForSeconds(level_3);
+                duration--;
+                Destroy(gameObject);
+                link.GetComponent<JeldaAI>().status = true;
+                break;
+            default:
+                break;
+        }
+    }
 }

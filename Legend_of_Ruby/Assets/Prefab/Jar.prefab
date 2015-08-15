@@ -60,6 +60,9 @@ MonoBehaviour:
   shrimp: {fileID: 21300000, guid: f159283ecfe7fde42958e1f613dd91e7, type: 3}
   poka: {fileID: 21300000, guid: cdc9da8098283db448d5e68405ba9a51, type: 3}
   fruit: {fileID: 21300000, guid: 2caed6f7959bb044e9c6cd1bc859e9d9, type: 3}
+  level_1: 1
+  level_2: 2
+  level_3: 3
 --- !u!212 &21253022
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -92,7 +95,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: level_1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: level_2
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: level_3
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: link2
+      value: 
+      objectReference: {fileID: 183134, guid: 264889ab85b136947b3da423d3d2e6a7, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 190168}

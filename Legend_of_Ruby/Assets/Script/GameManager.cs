@@ -10,24 +10,30 @@ public class GameManager : MonoBehaviour {
         jarList = new ArrayList();
         for (int i = 0; i < numJar; i++)
         {
-            GameObject newjar = (GameObject)Instantiate(jar, new Vector2(Random.Range(-15f, 15f), Random.Range(-8f, 8f)), Quaternion.identity);
+            GameObject newjar = (GameObject)Instantiate(jar, new Vector2(Random.Range(-11f, 11f), Random.Range(0f, 8f)), Quaternion.identity);
             jarList.Add(newjar);
         }
 	}
 
-    public void JarReset() {
-        for (int i = 0; i < jarList.Count; i++) {
-            if (jarList[i] == null) {
-                jarList.Remove(i);
+    public void JarReset()
+    {
+        for (int i = 0; i < jarList.Count; i++)
+        {
+            if ((GameObject)jarList[i] == null)
+            {
+                jarList.RemoveAt(i);
+                i--;
+                continue;
             }
             try
             {
                 ((GameObject)jarList[i]).GetComponent<Jar>().update = false;
             }
-            catch (MissingReferenceException e) {
+            catch (MissingReferenceException e)
+            {
 
             }
-            
+
         }
     }
 

@@ -8,15 +8,19 @@ public class JeldaAI : MonoBehaviour {
     public bool status;
     public int static1;
     public int static2;
+    float z;
 
 	// Use this for initialization
 	void Start () {
         static1 = 10;
-        static2 = 2;	
-	}
+        static2 = 2;
+        status = true;
+        z = gameObject.transform.position.z;
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        manager.GetComponent<GameManager>().JarReset();
         if (status == true)
         {
             ArrayList jarList = manager.GetComponent<GameManager>().jarList;
@@ -28,7 +32,7 @@ public class JeldaAI : MonoBehaviour {
                 priList[i] = 0;
                 genList[i] = 0;
             }
-            for (int i = 0; i < 10 && ((GameObject)jarList[i]); i++)
+            for (int i = 0; i < jarList.Count; i++)
             {
                 if (!((GameObject)jarList[i]).GetComponent<Jar>().update)
                 {
@@ -49,13 +53,17 @@ public class JeldaAI : MonoBehaviour {
             int a = 0;
             while(true)
             {
-                if(rand < genList[a])
+                if(rand <= genList[a])
                 {
                     target = ((GameObject)jarList[a]);
                     break;
                 }
                 a++;
             }
+            gameObject.transform.position = target.transform.position;
+            gameObject.transform.position += new Vector3(-1.5f, 0, z);
+            status = false;
+            StartCoroutine(target.GetComponent<Jar>().Hold(gameObject));
         }
 
 	

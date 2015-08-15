@@ -28,21 +28,29 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         GameObject.Find("GameManager").GetComponent<GameManager>().JarReset();
-        Debug.Log("ray count: " + rayList.Count);
+        GameObject.Find("Hanning").GetComponent<Renderer>().enabled = false;
+  //      Debug.Log("ray count: " + rayList.Count);
         for (int i = 0; i < rayList.Count; i++) {
             RaycastHit2D[] hit = Physics2D.RaycastAll(((Ray2D)rayList[i]).origin, AddAngle(((Ray2D)rayList[i]).direction, gameObject.transform.rotation.eulerAngles.z));
-            Debug.Log("hit: "+ hit.Length);
+ //           Debug.Log("hit: "+ hit.Length);
             foreach (RaycastHit2D Hit in hit) {
                 if (Hit.collider.tag == "obstacle")
                 {
                     break;
                 }
-                Hit.collider.GetComponent<Jar>().update = true;
+                else if (Hit.collider.name == "Jar(Clone)")
+                {
+                    Hit.collider.GetComponent<Jar>().update = true;
+                }
+                else if (Hit.collider.name == "Hanning") {
+                    Hit.collider.gameObject.GetComponent<Renderer>().enabled = true;
+                }
+                    
             }
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.D))
             gameObject.transform.Rotate(new Vector3(0f, 0f, -rotationSpeed));
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.A))
             gameObject.transform.Rotate(new Vector3(0f, 0f, rotationSpeed));
     }
 

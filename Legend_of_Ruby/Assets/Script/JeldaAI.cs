@@ -1,13 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class JeldaAI : MonoBehaviour {
 
     public GameObject manager;
     public GameObject target;
+    public Sprite normalSprite;
+    public Sprite freezeSprite;
     public bool status;
     public int static1;
     public int static2;
+    public bool freeze;
+    public bool freezeState;
+    public float freezeTime;
     float z;
 
 	// Use this for initialization
@@ -15,14 +21,18 @@ public class JeldaAI : MonoBehaviour {
         static1 = 10;
         static2 = 2;
         status = true;
+        freeze = false;
         z = gameObject.transform.position.z;
     }
 	
 	// Update is called once per frame
 	void Update () {
         manager.GetComponent<GameManager>().JarReset();
-        if (status == true)
+        if ((status && !freeze) || (freeze && freezeState))
         {
+            freeze = false;
+            freezeState = false;
+            gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
             ArrayList jarList = manager.GetComponent<GameManager>().jarList;
             int[] priList = new int[10];
             int[] genList = new int[10];
@@ -66,8 +76,16 @@ public class JeldaAI : MonoBehaviour {
             StartCoroutine(target.GetComponent<Jar>().Hold(gameObject));
         }
 
-	
-	}
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
+            if (hit.collider != null && hit.collider.gameObject == gameObject)
+            {
+                StartCoroutine(Freeze());
+            }
+        }
+    }
     public int priLevel(GameObject jar)
     {
         switch (jar.GetComponent<Jar>().duration)
@@ -81,5 +99,12 @@ public class JeldaAI : MonoBehaviour {
             default:
                 return 0;
         }
+    }
+    IEnumerator Freeze() {
+        freeze = true;
+        freezeState = false;
+        gameObject.GetComponent<SpriteRenderer>().sprite = freezeSprite;
+        yield return new WaitForSeconds(freezeTime);
+        freezeState = true;
     }
 }

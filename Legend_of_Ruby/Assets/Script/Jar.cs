@@ -41,19 +41,29 @@ public class Jar : MonoBehaviour {
         switch (duration) {
             case 3:
                 yield return new WaitForSeconds(level_1);
-                duration--;
-                link.GetComponent<JeldaAI>().status = true;
+                if (!link.GetComponent<JeldaAI>().freeze)
+                {
+                    duration--;
+                    link.GetComponent<JeldaAI>().status = true;
+                }   
                 break;
             case 2:
                 yield return new WaitForSeconds(level_2);
-                duration--;
-                link.GetComponent<JeldaAI>().status = true;
+                if (!link.GetComponent<JeldaAI>().freeze) {
+                    duration--;
+                    link.GetComponent<JeldaAI>().status = true;
+                }
                 break;
             case 1:
                 yield return new WaitForSeconds(level_3);
-                duration--;
-                Destroy(gameObject);
-                link.GetComponent<JeldaAI>().status = true;
+                if (!link.GetComponent<JeldaAI>().freeze)
+                {
+                    duration--;
+                    GameObject.Find("GameManager").GetComponent<GameManager>().MentalDeal();
+                    GameObject.Find("GameManager").GetComponent<GameManager>().MoneyDeal();
+                    Destroy(gameObject);
+                    link.GetComponent<JeldaAI>().status = true;
+                }
                 break;
             default:
                 break;

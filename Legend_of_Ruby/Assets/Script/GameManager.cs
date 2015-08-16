@@ -4,6 +4,12 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
     public GameObject jar;
+    GameObject winText;
+    GameObject loseText;
+    GameObject replayBtn;
+    GameObject nextBtn;
+    public AudioClip clearsound;
+    public AudioClip losesound;
     public ArrayList jarList;
     public int limitMoney;
     public int money;
@@ -14,8 +20,10 @@ public class GameManager : MonoBehaviour {
     public int moneyDamage;
     public int mentalDamageSpeed;
     public int showMoney;
+    public string nextStage;
     bool fail;
     bool end;
+    bool onece;
 
     IEnumerator Timer() {
         yield return new WaitForSeconds(30f);
@@ -26,6 +34,16 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         fail = false;
         end = false;
+        onece = true;
+        winText = GameObject.Find("WinText");
+        loseText = GameObject.Find("LoseText") ;
+        replayBtn = GameObject.Find("Replay");
+        nextBtn = GameObject.Find("NextStage");
+        winText.SetActive(false);
+        loseText.SetActive(false);
+        replayBtn.SetActive(false);
+        if(nextBtn != null)
+            nextBtn.SetActive(false);
         jarList = new ArrayList();
         GameObject[] copyList = GameObject.FindGameObjectsWithTag("Jar");
         StartCoroutine(Timer());
@@ -89,6 +107,14 @@ public class GameManager : MonoBehaviour {
 
         }
     }
+
+    IEnumerator clear() {
+        AudioSource.PlayClipAtPoint(clearsound, Vector3.zero);
+        yield return new WaitForSeconds(8.5f);
+        winText.SetActive(true);
+        nextBtn.SetActive(true);
+        replayBtn.SetActive(true);
+    }
     
 	// Update is called once per frame
 	void Update () {
@@ -111,10 +137,20 @@ public class GameManager : MonoBehaviour {
             Destroy(GameObject.Find("Player"));
             Destroy(GameObject.Find("Hanning"));
             GameObject.Find("Main Camera").GetComponent<AudioSource>().Stop();
-            if (mental > 0 && money > limitMoney)
-                GameObject.Find("WinSound").GetComponent<AudioSource>().Play();
-            else if(!fail)
-                GameObject.Find("LoseSound").GetComponent<AudioSource>().Play();
+            if (mental > 0 && money > limitMoney && onece)
+            {
+                onece = false;
+                StartCoroutine(clear());
+            }
+            else if(onece){
+                onece = false;
+                loseText.SetActive(true);
+                replayBtn.SetActive(true);
+                if (!fail)
+                {
+                    AudioSource.PlayClipAtPoint(losesound, Vector3.zero);
+                }
+            }
         }
 	}
 }

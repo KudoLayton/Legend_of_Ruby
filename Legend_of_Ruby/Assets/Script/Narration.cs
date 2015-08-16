@@ -55,7 +55,7 @@ public class Narration : MonoBehaviour {
         }
         else
         {
-            _script.text = "Finish Script";
+            Application.LoadLevel("SelectLevel");
         }
     }
 }
